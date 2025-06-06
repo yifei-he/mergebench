@@ -313,7 +313,7 @@
       <div class="column is-8">
         <div class="content has-text-justified">
           <p>
-            <strong>Efficiency effectiveness tradeoff. </strong> The plot highlights the trade-off between effectiveness and efficiency across model merging methods. Both versions of Localize-andStitch, RegMean, and Task Arithmetic achieve a favorable balance. Based on this analysis, we recommend the following decision guideline for practitioners: Start with Model Soup for its extremely low-cost merging, which requires no additional
+            <strong>Practical guidelines. </strong> The plot highlights the trade-off between effectiveness and efficiency across model merging methods. Both versions of Localize-andStitch, RegMean, and Task Arithmetic achieve a favorable balance. Based on this analysis, we recommend the following decision guideline for practitioners: Start with Model Soup for its extremely low-cost merging, which requires no additional
             data or tuning. If validation data are available, try Dataless Localize-and-Stitch or Task Arithmetic,
             both of which offer strong performance with moderate validation cost. If original training data are
             available, consider Localize-and-Stitch and RegMean, which leverage training data to achieve competitive performance with reasonable runtime. While TIES and DARE achieve decent performance,
@@ -326,7 +326,34 @@
 </section>
 <!-- End image section -->
 
+<!-- Takeaways and Future Directions -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered">Takeaways and Future Directions</h2>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-justified">
+          <p>
+            <strong>Summary of Key Insights.</strong> Our comprehensive evaluation of model merging methods across different model scales and domains reveals several important findings. First, model merging tends to perform better on stronger base models, with larger models (8B-9B) achieving over 90% of the fully finetuned performance, compared with their smaller counterparts with at most 80% performance. Second, merging methods that incorporate scaling coefficients and sparsity constraints better preserves base model knowledge. Third, there exists a clear trade-off between effectiveness and efficiency in model merging, and in the runtime analysis, we find that the hyperparameter tuning procedure dominates the merging cost, while being less discussed in the literature. These insights provide a foundation for understanding when and how to effectively apply model merging in practice.
+          </p>
 
+          <p>
+            <strong>Opportunities for improving merging efficiency.</strong> Despite being computationally cheaper than retraining, current model merging methods often incur non-trivial merging costs. Hyperparameter tuning, especially for scaling and sparsity, remains inefficient and largely trial-and-error, limiting the practicality of applying these methods to large-scale models.
+          </p>
+
+          <p>
+            <strong>Mix data or merge models?</strong> While model merging avoids joint training, the overall cost of training multiple specialized models remains comparable to training a single multi-task model. Our results show that multi-task models generally achieve stronger in-domain performance, particularly when the tasks are non-conflicting and a balanced data mixture can be constructed. This raises questions about the fundamental limitations of model merging compared to MTL in such settings. Nevertheless, model merging shows clear benefits in low-resource or imbalanced settings, such as fine-grained safety alignment and multilingual language models, where data mixing is inherently challenging. A deeper understanding of the trade-offs between data mixing and model merging remains an important future direction.
+          </p>
+
+          <p>
+            <strong>Positioning model merging in LLM Pipelines.</strong> Model merging is still rarely integrated into mainstream LLM development pipelines, with a few notable exceptions. For example, Llama-3 employs model soup to average models trained with different hyperparameter settings for improved robustness. Command A applies merging similarly to our setting, combining separately trained specialized models. However, the potential applications of model merging could extend beyond these use cases. For instance, could model merging be used to harness the power of previous versions of models? Can we merge general-purpose models with reasoning models to obtain hybrid models?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Takeaways and Future Directions -->
 
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
